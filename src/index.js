@@ -25,7 +25,7 @@ export const isVoid = (value) => {
   let isUndefined = typeof value == 'undefined'
   let isEmptyArray = (typeof value == 'array') && value.length==0
   let isEmptyString = (typeof value == 'string') && value.length==0
-  let isNull = value==null
+  let isNull = value===null
 
   return isEmptyObject || isUndefined || isEmptyArray || isEmptyString || isNull
 }
