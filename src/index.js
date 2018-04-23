@@ -2,6 +2,7 @@ import reduce from 'lodash/reduce';
 import reverse from 'lodash/reverse';
 import split from 'lodash/split';
 import merge from 'lodash/merge';
+import isNaN from 'lodash/isNaN';
 import * as Internal from './internal';
 
 /**
@@ -61,13 +62,43 @@ export const deepDiff = (obj1, obj2, path) => {
  *
  */
 export const immutableUpdatePayloadTransform = (payload) => {
-  let { action='$set', updateValue, keyString, delimiter='.' } = payload
+  let { objectAutoVivificationCommand='$auto', arrayAutoVivificationCommand='$autoArray', action='$set', updateValue, keyString, delimiter='.' } = payload
+  let targetObjectTerminalNode = (action=='$push') ? { [arrayAutoVivificationCommand]: { [action] : updateValue }} : { [action] : updateValue }
 
   return reduce(reverse(split(keyString,delimiter)), (result, value, key) => {
     return {
-      $auto: {
+      [objectAutoVivificationCommand]: {
         [value] : result
       }
     }
-  }, { [action] : updateValue })
+  }, targetObjectTerminalNode)
+}
+
+/**
+ * Check if `value` is numeric
+ *
+ * @since 1.0.6
+ * @category Misc
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns true if `value` is void.
+ * @example
+ *
+ * isNumeric(6)
+ * // => true
+ *
+ * isNumeric({a: 'A'})
+ * // => false
+ *
+ * isNumeric('abc')
+ * // => false
+ *
+ * isNumeric(['a','b'])
+ * // => false
+ *
+ * isNumeric('6')
+ * // => true
+ *
+ */
+export const isNumeric = value => {
+  return ((typeof value === 'number' || typeof value === 'string') && !isNaN(Number(value)));
 }
