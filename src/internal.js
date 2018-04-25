@@ -2,6 +2,8 @@ import reduce from 'lodash/reduce';
 import isEqual from 'lodash/isEqual';
 import isObject from 'lodash/isObject';
 
+import { deepDiff } from './index.js';
+
 export const _deepDiff = (obj1, obj2, path) => {
     obj1 = obj1 || {};
     obj2 = obj2 || {};

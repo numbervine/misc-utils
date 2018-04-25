@@ -4473,7 +4473,7 @@ var isVoid = function isVoid(value) {
  * @returns {Array} Paths not common to both objects, or containing different values
  *
  */
-var deepDiff$1 = function deepDiff(obj1, obj2, path) {
+var deepDiff = function deepDiff(obj1, obj2, path) {
   return merge_1(_deepDiff(obj1, obj2, path), _deepDiff(obj2, obj1, path));
 };
 
@@ -4537,4 +4537,4 @@ var isNumeric = function isNumeric(value) {
   return (typeof value === 'number' || typeof value === 'string') && !_isNaN(Number(value));
 };
 
-export { isVoid, deepDiff$1 as deepDiff, immutableUpdatePayloadTransform, isNumeric };
+export { isVoid, deepDiff, immutableUpdatePayloadTransform, isNumeric };
