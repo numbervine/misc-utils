@@ -4505,7 +4505,7 @@ var immutableUpdatePayloadTransform = function immutableUpdatePayloadTransform(p
       _payload$delimiter = payload.delimiter,
       delimiter = _payload$delimiter === undefined ? '.' : _payload$delimiter;
 
-  var targetObjectTerminalNode = action == '$push' ? defineProperty$2({}, arrayAutoVivificationCommand, defineProperty$2({}, action, updateValue)) : defineProperty$2({}, action, updateValue);
+  var targetObjectTerminalNode = action == '$push' ? defineProperty$2({}, arrayAutoVivificationCommand, defineProperty$2({}, action, updateValue)) : defineProperty$2({}, objectAutoVivificationCommand, defineProperty$2({}, action, updateValue));
 
   return reduce_1(reverse_1(split_1(keyString, delimiter)), function (result, value, key) {
     return defineProperty$2({}, objectAutoVivificationCommand, defineProperty$2({}, value, result));
