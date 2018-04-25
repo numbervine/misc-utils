@@ -63,7 +63,7 @@ export const deepDiff = (obj1, obj2, path) => {
  */
 export const immutableUpdatePayloadTransform = (payload) => {
   let { objectAutoVivificationCommand='$auto', arrayAutoVivificationCommand='$autoArray', action='$set', updateValue, keyString, delimiter='.' } = payload
-  let targetObjectTerminalNode = (action=='$push') ? { [arrayAutoVivificationCommand]: { [action] : updateValue }} : { [action] : updateValue }
+  let targetObjectTerminalNode = (action=='$push') ? { [arrayAutoVivificationCommand]: { [action] : updateValue }} : { [objectAutoVivificationCommand]: { [action] : updateValue }}
 
   return reduce(reverse(split(keyString,delimiter)), (result, value, key) => {
     return {
